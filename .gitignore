@@ -1,3 +1,11 @@
+
+backend/.vim/
+database/mysql/data/
+database/mysql/log/
+
+# =====================================
+# From Github Template
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
