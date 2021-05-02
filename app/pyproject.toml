@@ -9,6 +9,7 @@ python = "^3.6.7"
 fastapi = "^0.63.0"
 uvicorn = "^0.13.4"
 alembic = "^1.5.8"
+mysqlclient = "^2.0.3"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.1"
