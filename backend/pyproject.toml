@@ -1,18 +1,18 @@
 [tool.poetry]
 name = "agni"
 version = "0.1.0"
-description = "Simple API scaffold for Information Retrieval System"
+description = ""
 authors = ["Yusuke Shimizu <44394399+ushmz@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
-python = "3.6.7"
+python = "^3.6.7"
 fastapi = "^0.63.0"
-sqlalchemy = "^1.4.11"
-alembic = "^1.5.8"
 uvicorn = "^0.13.4"
+alembic = "^1.5.8"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.1"
+black = "^21.4b2"
 
 [build-system]
 requires = ["poetry>=0.12"]
