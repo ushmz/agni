@@ -1,5 +1,5 @@
 
-backend/.vim/
+app/.vim/
 database/mysql/data/
 database/mysql/log/
 
