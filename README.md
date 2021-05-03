@@ -9,50 +9,30 @@ This API helps you to concentrate on developing your own interface.
 
 - python (^3.6.7)
 - docker
+- [dbmate](https://github.com/amacneil/dbmate)
 
 ## Run
 
 The first time you have to build container with `--build` option.
 
-- API server
-
 ```sh
-cd app
-docker compose up --build
+docker compose build
 ```
 
-- DB(MySQL)
+Once you build container, you can run servers without `--build` option.
 
 ```sh
-cd database
-docker compose up --build
+docker compose start
 ```
 
 Now you can see API server in `localhost:8888`, and MySQL server in `localhost:3336`.
 
-Once you build container, you can run servers without `--build` option.
-
-- API server
-
-```sh
-cd app
-docker compose up
-```
-
-- DB(MySQL)
-
-```sh
-cd database
-docker compose up
-```
+If you want run each container individually, go to `app` / `database` directory and run `docker compose up (--build)`.
 
 Of curse you can run w/o docker ;)
 
+
 ## Develop
-
-1. Clone this repository.
-
-2. Install dependencies.
 
 In `/app` directory, there are dependency list files. (`pyproject.toml` and `requirements.txt`)
 
