@@ -12,18 +12,38 @@ This API helps you to concentrate on developing your own interface.
 
 ## Run
 
-### API server
+The first time you have to build container with `--build` option.
+
+- API server
 
 ```sh
 cd app
 docker compose up --build
 ```
 
-### DB(MySQL)
+- DB(MySQL)
 
 ```sh
 cd database
 docker compose up --build
+```
+
+Now you can see API server in `localhost:8888`, and MySQL server in `localhost:3336`.
+
+Once you build container, you can run servers without `--build` option.
+
+- API server
+
+```sh
+cd app
+docker compose up
+```
+
+- DB(MySQL)
+
+```sh
+cd database
+docker compose up
 ```
 
 Of curse you can run w/o docker ;)
@@ -38,7 +58,7 @@ In `/app` directory, there are dependency list files. (`pyproject.toml` and `req
 
 If you use [poetry](https://python-poetry.org/), run following command.
 
-\* **Make sure you have compatible python environment.**
+\* **Make sure you have compatible python environment. (3.6.7)**
 
 ```sh
 poetry shell
@@ -50,3 +70,5 @@ If not, install dependencies by using `requirements.txt` like
 ```sh
 pip install -r requirements.txt
 ```
+
+3. Edit as you like. 🎉
