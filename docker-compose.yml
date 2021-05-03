@@ -1,0 +1,41 @@
+version: "3.3"
+
+services:
+    web:
+        container_name: "agni_app"
+        build:
+            context: ./app
+        command:
+            uvicorn app:app --host 0.0.0.0 --port 8000
+        restart: "always"
+        tty: true
+        ports:
+            - 8888:8000
+        volumes:
+            - ./app:/app
+        working_dir: /app
+        depends_on:
+            - db
+
+    db:
+        container_name: "agni_mysql"
+        build:
+            context: ./database
+        command:
+            mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+        restart: "always"
+        tty: true
+        environment:
+            MYSQL_DATABASE: agni
+            MYSQL_USER: agni
+            MYSQL_PASSWORD: agni
+            MYSQL_ROOT_PASSWORD: root
+            TZ: Asia/Tokyo
+        ports:
+            - 3336:3306
+        volumes:
+            - ./database/mysql/initdb.d:/docker-entrypoint-initdb.d
+            - ./database/mysql/conf.d:/etc/mysql/conf.d
+            - ./database/mysql/log:/var/log/mysql
+            - ./database/mysql/data:/var/lib/mysql
+
