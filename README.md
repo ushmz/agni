@@ -22,14 +22,16 @@ docker compose build
 Once you build container, you can run servers without `--build` option.
 
 ```sh
-docker compose start
+docker compose up
 ```
 
 Now you can see API server in `localhost:8888`, and MySQL server in `localhost:3336`.
 
-If you want run each container individually, go to `app` / `database` directory and run `docker compose up (--build)`.
+If you want run mysql container only, add service name as argument.
 
-Of curse you can run w/o docker ;)
+```sh
+docker compose up mysql
+```
 
 
 ## Develop

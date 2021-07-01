@@ -21,12 +21,16 @@ docker compose build
 一度実行すれば，以降は以下のコマンドで起動することができます．
 
 ```sh
-docker compose start
+docker compose up
 ```
 
 `localhost:8888` に API サーバ，`localhost:3336` に MySQL サーバが起動します．
 
-もしも個別にコンテナを起動したい場合は，`app` / `database` ディレクトリに移動し，同様のコマンドを実行してください．
+もしもDBコンテナのみを起動したい場合は，以下のように service 名を引数に指定してください．
+
+```sh
+docker compose up db
+```
 
 
 ## Develop
