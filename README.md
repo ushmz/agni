@@ -30,7 +30,7 @@ Now you can see API server in `localhost:8888`, and MySQL server in `localhost:3
 If you want run mysql container only, add service name as argument.
 
 ```sh
-docker compose up mysql
+docker compose up db
 ```
 
 
