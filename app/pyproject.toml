@@ -9,11 +9,12 @@ python = "^3.6.7"
 fastapi = "^0.63.0"
 uvicorn = "^0.13.4"
 alembic = "^1.5.8"
-mysqlclient = "^2.0.3"
+mysql-connector-python = "^8.0.25"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.9.1"
 black = "^21.4b2"
+icecream = "^2.1.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
