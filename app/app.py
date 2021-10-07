@@ -1,4 +1,4 @@
-from routers import task, user
+from routers import task, user, log, serp
 from fastapi import FastAPI
 
 # from starlette.responses import JSONResponse
@@ -16,8 +16,10 @@ app.add_middleware(
 
 app.include_router(user.router)
 app.include_router(task.router)
+app.include_router(log.router)
+app.include_router(serp.router)
 
 
 @app.get("/")
 def say_hello():
-    return {"hello": "world"}
+    return {"hello": "Keep greeting to world forever."}

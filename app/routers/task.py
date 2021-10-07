@@ -1,41 +1,20 @@
-from models import task
+from repository.task import TaskRepositoryImpl
+from usecase.task import TaskUsecase
 from fastapi import APIRouter
+from domain.task import Answer, Task
 
 router = APIRouter()
 
 
-@router.get("/task/{task_id}")
-def fetch_task_info(task_id: str):
-    return {
-        "title": "",
-        "description": "",
-        "query": "",
-        "author_id": "",
-        "search_url": "",
-    }
+@router.get("/tasks/{task_id}", response_model=Task)
+def fetch_task_description(task_id: int) -> Task:
+    repo = TaskRepositoryImpl()
+    task = TaskUsecase(repo).get_task_description(task_id)
+    return task
 
 
-@router.post("/tasks")
-def post_answer(request: task.TaskParam):
-    return {"id": 1}
-
-
-@router.get("/serp/{task_id}", response_model=task.SerpResponse)
-def fetch_serp_by_id(task_id: str):
-    return {
-        "task_id": task_id,
-        "serps": [
-            {
-                "id": "1",
-                "title": "Dummy title",
-                "url": "http://example.com",
-                "snippet": "Sample snippet",
-            },
-            {
-                "id": "2",
-                "title": "Dummy title",
-                "url": "http://example.com",
-                "snippet": "Sample snippet",
-            },
-        ],
-    }
+@router.post("/answer/{task_id}")
+def save_answer(task_id: int, answer: Answer) -> None:
+    repo = TaskRepositoryImpl()
+    TaskUsecase(repo).save_task_answer(task_id, answer)
+    return

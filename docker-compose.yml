@@ -11,7 +11,9 @@ services:
             - 8000:8000
         tty: true
         volumes:
-            - ./app:/app
+          - type: bind
+            source: ./app
+            target: /app
         working_dir: /app
         depends_on:
             - db
@@ -31,8 +33,16 @@ services:
         ports:
             - 3336:3306
         volumes:
-            - ./database/mysql/initdb.d:/docker-entrypoint-initdb.d
-            - ./database/mysql/conf.d:/etc/mysql/conf.d
-            - ./database/mysql/log:/var/log/mysql
-            - ./database/mysql/data:/var/lib/mysql
+          - type: bind
+            source: ./database/mysql/initdb.d
+            target: /docker-entrypoint-initdb.d
+          - type: bind
+            source: ./database/mysql/conf.d
+            target: /etc/mysql/conf.d
+          - type: bind
+            source: ./database/mysql/log
+            target: /var/log/mysql
+          - type: bind
+            source: ./database/mysql/data
+            target: /var/lib/mysql
 
