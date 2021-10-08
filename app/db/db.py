@@ -1,12 +1,16 @@
 import configparser
 import mysql.connector as db
-from typing import Any, List
-
-from models.task import Serp, TaskInfo
-from models.log import BehaviorLog
+from typing import Any
 
 
-def get_connection():
+def get_env(key: str, default: str) -> str:
+    _parser = configparser.ConfigParser()
+    _parser.read("./config.ini")
+    val = _parser[key]
+    return str(val) if val else default
+
+
+def get_mysql_connection():
     _parser = configparser.ConfigParser()
     _parser.read("./config.ini")
 
@@ -34,7 +38,7 @@ def exec_query(query: str, **params) -> Any:
     returns:
         result     : Query result
     """
-    conn = get_connection()
+    conn = get_mysql_connection()
     cur = conn.cursor(dictionary=True)
 
     try:
@@ -46,94 +50,3 @@ def exec_query(query: str, **params) -> Any:
     finally:
         cur.close()
         conn.close()
-
-
-def get_completion_code(user_id: int) -> str:
-    """
-    Get user's completion code from DB.
-
-    args:
-        user_id(int) : User ID that you'd like to get
-    returns:
-        completion_code(str) : Completion code
-    """
-    connection = get_connection()
-    cur = connection.cursor(dictionary=True)
-
-    try:
-        cur.execute(
-            """
-            SELECT
-                completion_code
-            FROM
-                completion_codes
-            RIGHT JOIN
-                users
-            ON
-                users.id = completion_codes.uid
-            WHERE
-                users.id = ?
-            """,
-            user_id,
-        )
-
-        res = cur.fetchall()
-
-        if len(res) != 1:
-            print("[WARNING] User Id duplication is detected!!")
-
-        return res[-1]["completion_code"]
-    except Exception as e:
-        print(f"[ERROR] {e}")
-        return ""
-    finally:
-        cur.close()
-        connection.close()
-
-
-def get_task_info(task_id: int) -> TaskInfo:
-    """
-    Get task information, like title, descriptions, etc...
-
-    args:
-        task_id(int) : Task id that you'd like to fetch
-    returns:
-        info(TaskInfo) : Information object
-    """
-    raise NotImplementedError(f"params: task_id={task_id}")
-
-
-def get_serp(task_id: int) -> List[Serp]:
-    """
-    Get search result pages by given task INIT_DB
-
-    args:
-        task_id(int) : Task ID
-    returns:
-        serps(List[Serp]) : Listed result page objects
-    """
-    raise NotImplementedError(f"params: task_id={task_id}")
-
-
-def create_log(behavior: BehaviorLog) -> None:
-    """
-    Create behavior log object and insert it to DB
-
-    args:
-        behavior(BehaviorLog) : Behavior log parameters
-    returns:
-        None
-    """
-    raise NotImplementedError(f"params: behavior={behavior}")
-
-
-def create_answer(answer: str) -> None:
-    """
-    Insert user's answer to DB
-
-    args:
-        answer(str) : User's task answer
-    returns:
-        None
-    """
-    raise NotImplementedError(f"params: answer={answer}")

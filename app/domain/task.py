@@ -5,7 +5,7 @@ class TaskParam(BaseModel):
     task_id: int
 
 
-class TaskInfo(BaseModel):
+class Task(BaseModel):
     title: str
     description: str
     query: str
@@ -13,7 +13,7 @@ class TaskInfo(BaseModel):
     search_url: str
 
 
-class Serp(BaseModel):
+class SearchResult(BaseModel):
     id: str
     title: str
     url: str
@@ -23,3 +23,9 @@ class Serp(BaseModel):
 class SerpResponse(BaseModel):
     task_id: str
     serps: list
+
+
+class Answer(BaseModel):
+    task_id: int
+    answer: str
+    reason: str

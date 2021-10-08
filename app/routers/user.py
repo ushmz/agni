@@ -1,25 +1,19 @@
-from starlette.responses import Response
-from models.user import CompletionResponse, TokenResponse, UserParam
+from usecase.user import UserUsecase
+from repository.user import UserRepositoryImpl
+from domain.user import AuthedUserResponse, CompletionResponse
 from fastapi import APIRouter
 
 router = APIRouter()
 
 
-@router.post("/signup", response_model=TokenResponse)
-def signup(request: UserParam):
-    return {"token": ""}
+@router.get("/users/{user_id}", response_model=AuthedUserResponse)
+def get_user(user_id: int):
+    return {"token": "", "user": {}}
 
 
-@router.post("/signin", response_model=TokenResponse)
-def signin(request: UserParam):
-    return {"token": ""}
-
-
-@router.get("/user/{user_id}/code", response_model=CompletionResponse)
-def fetch_completion_code(user_id: str):
-    return {"code": user_id}
-
-
-@router.post("/user/{user_id}/logs")
-def post_log():
-    return Response(status_code=204)
+@router.get("/users/{user_id}/code", response_model=CompletionResponse)
+def fetch_completion_code(user_id: int):
+    repo = UserRepositoryImpl()
+    uu = UserUsecase(repo)
+    code = uu.get_completion_code(user_id)
+    return {"code": code}
