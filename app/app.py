@@ -1,4 +1,4 @@
-from routers import task, user, log, serp
+from routers import task, user, log, serp, auth
 from fastapi import FastAPI
 
 # from starlette.responses import JSONResponse
@@ -14,10 +14,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(user.router)
-app.include_router(task.router)
-app.include_router(log.router)
-app.include_router(serp.router)
+app.include_router(auth.router, prefix="/api/v1")
+app.include_router(task.router, prefix="/api/v1")
+app.include_router(serp.router, prefix="/api/v1")
+app.include_router(user.router, prefix="/api/v1")
+app.include_router(log.router, prefix="/api/v1")
 
 
 @app.get("/")

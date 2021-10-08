@@ -1,25 +1,17 @@
 from usecase.user import UserUsecase
 from repository.user import UserRepositoryImpl
-from domain.user import AuthedUserResponse, CompletionResponse, UserParam
+from domain.user import AuthedUserResponse, CompletionResponse
 from fastapi import APIRouter
 
 router = APIRouter()
 
 
-@router.post("/signup", response_model=AuthedUserResponse)
-def signup(req: UserParam):
-    repo = UserRepositoryImpl()
-    uu = UserUsecase(repo)
-    user = uu.create_user(req)
-    return {"token": "", "user": user}
-
-
-@router.post("/signin", response_model=AuthedUserResponse)
-def signin(req: UserParam):
+@router.get("/users/{user_id}", response_model=AuthedUserResponse)
+def get_user(user_id: int):
     return {"token": "", "user": {}}
 
 
-@router.get("/code/user/{user_id}", response_model=CompletionResponse)
+@router.get("/users/{user_id}/code", response_model=CompletionResponse)
 def fetch_completion_code(user_id: int):
     repo = UserRepositoryImpl()
     uu = UserUsecase(repo)

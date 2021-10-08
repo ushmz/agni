@@ -13,7 +13,7 @@ def fetch_task_description(task_id: int) -> Task:
     return task
 
 
-@router.post("/answer/{task_id}")
+@router.post("/tasks/{task_id}/answer")
 def save_answer(task_id: int, answer: Answer) -> None:
     repo = TaskRepositoryImpl()
     TaskUsecase(repo).save_task_answer(task_id, answer)

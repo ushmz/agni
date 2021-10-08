@@ -6,7 +6,7 @@ from fastapi import APIRouter, status
 router = APIRouter()
 
 
-@router.post("/logs/click", status_code=status.HTTP_204_NO_CONTENT)
+@router.post("/users/{user_id}/logs/click", status_code=status.HTTP_204_NO_CONTENT)
 def post_click_log(task_id: int, param: ClickLog):
     repo = LogRepositoryImple()
     lu = LogUsecase(repo)
@@ -14,7 +14,7 @@ def post_click_log(task_id: int, param: ClickLog):
     return
 
 
-@router.post("/logs/time/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.post("/users/{user_id}/logs/time", status_code=status.HTTP_204_NO_CONTENT)
 def post_time_log(user_id: int, param: TimeLog):
     repo = LogRepositoryImple()
     lu = LogUsecase(repo)
