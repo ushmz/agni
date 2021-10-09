@@ -15,11 +15,11 @@ def get_mysql_connection():
     _parser.read("./config.ini")
 
     return db.connect(
-        host=_parser["mysql"]["host"],
-        port=_parser["mysql"]["port"],
-        user=_parser["mysql"]["user"],
-        password=_parser["mysql"]["password"],
-        database=_parser["mysql"]["database"],
+        host=_parser["host"],
+        port=_parser["port"],
+        user=_parser["user"],
+        password=_parser["password"],
+        database=_parser["database"],
     )
 
 
