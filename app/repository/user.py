@@ -1,4 +1,4 @@
-from db.db import get_mysql_connection
+from infra.db import get_mysql_connection
 from domain.repository.user import UserRepository
 from domain.user import UserParam, UserSimple
 
