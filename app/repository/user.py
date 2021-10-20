@@ -1,4 +1,4 @@
-from infra.db import get_mysql_connection
+from infra.mysql import get_connection
 from domain.repository.user import UserRepository
 from domain.user import UserParam, UserSimple
 
@@ -13,7 +13,7 @@ class UserRepositoryImpl(UserRepository):
         returns:
             user(UserSimple) : Simple user information
         """
-        connection = get_mysql_connection()
+        connection = get_connection()
         cur = connection.cursor(dictionary=True)
 
         try:
@@ -25,7 +25,7 @@ class UserRepositoryImpl(UserRepository):
                     ?
                 )
                 """,
-                params.uid,
+                params.external_id,
             )
 
             res = cur.fetchall()
@@ -46,7 +46,7 @@ class UserRepositoryImpl(UserRepository):
         returns:
             user(UserSimple) : User information
         """
-        connection = get_mysql_connection()
+        connection = get_connection()
         cur = connection.cursor(dictionary=True)
 
         try:
@@ -87,7 +87,7 @@ class UserRepositoryImpl(UserRepository):
         returns:
             completion_code(str) : Completion code
         """
-        connection = get_mysql_connection()
+        connection = get_connection()
         cur = connection.cursor(dictionary=True)
 
         try:
