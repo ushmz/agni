@@ -1,6 +1,6 @@
 from usecase.serp import SerpUsecase
 from repository.serp import SerpRepositoryImpl
-from domain.task import SearchResult
+from domain.serp import SearchResult
 from typing import List
 from fastapi import APIRouter
 

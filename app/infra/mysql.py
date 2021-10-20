@@ -10,7 +10,7 @@ def get_env(key: str, default: str) -> str:
     return str(val) if val else default
 
 
-def get_mysql_connection():
+def get_connection():
     _parser = configparser.ConfigParser()
     _parser.read("./config.ini")
 
@@ -38,7 +38,7 @@ def exec_query(query: str, **params) -> Any:
     returns:
         result     : Query result
     """
-    conn = get_mysql_connection()
+    conn = get_connection()
     cur = conn.cursor(dictionary=True)
 
     try:

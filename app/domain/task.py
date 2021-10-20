@@ -13,18 +13,6 @@ class Task(BaseModel):
     search_url: str
 
 
-class SearchResult(BaseModel):
-    id: str
-    title: str
-    url: str
-    snippet: str
-
-
-class SerpResponse(BaseModel):
-    task_id: str
-    serps: list
-
-
 class Answer(BaseModel):
     task_id: int
     answer: str

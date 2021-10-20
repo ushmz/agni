@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from domain.task import SearchResult
+from domain.serp import SearchResult
 from typing import List
 
 
