@@ -1,22 +1,26 @@
-from typing import Union
+from typing import List
 from pydantic import BaseModel
 
 
 class UserParam(BaseModel):
-    uid: str
-    external_id: Union[str, None]
+    external_id: str
     # passwd: str
 
 
 class UserSimple(BaseModel):
-    uid: str
+    id: int
     external_id: str
-    condition_id: int
-    # allocated_task?
+    condition: int
+    tasks: List[int]
 
 
 class TokenResponse(BaseModel):
     token: str
+
+
+class CompletionCodeParam(BaseModel):
+    user: int
+    code: int
 
 
 class CompletionResponse(BaseModel):

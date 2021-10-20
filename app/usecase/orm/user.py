@@ -19,7 +19,7 @@ class UserUsecase:
             {
                 "id": user.id,
                 "external_id": user.external_id,
-                "condition_id": 5,
+                "condition": 5,
                 "tasks": [1, 2],
             }
         )
@@ -31,7 +31,7 @@ class UserUsecase:
             {
                 "id": user.id,
                 "external_id": user.external_id,
-                "condition_id": 5,
+                "condition": 5,
                 "tasks": [1, 2],
             }
         )
