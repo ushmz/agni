@@ -15,11 +15,11 @@ def get_connection():
     _parser.read("./config.ini")
 
     return db.connect(
-        host=_parser["host"],
-        port=_parser["port"],
-        user=_parser["user"],
-        password=_parser["password"],
-        database=_parser["database"],
+        host=_parser["DEFAULT"]["host"],
+        port=_parser["DEFAULT"]["port"],
+        user=_parser["DEFAULT"]["user"],
+        password=_parser["DEFAULT"]["password"],
+        database=_parser["DEFAULT"]["database"],
     )
 
 
