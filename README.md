@@ -50,7 +50,7 @@ In `/app` directory, there are dependency list files. (`pyproject.toml` and `req
 
 If you use [poetry](https://python-poetry.org/), run following command.
 
-\* **Make sure you have compatible python environment. (^*3.6.7)**
+\* **Make sure you have compatible python environment. (^3.6.7)**
 
 ```sh
 poetry shell
