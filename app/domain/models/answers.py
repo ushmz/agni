@@ -10,6 +10,7 @@ class Answers(Base):
         Integer,
         index=True,
         primary_key=True,
+        autoincrement=True,
         comment="Identification for internal process",
     )
 

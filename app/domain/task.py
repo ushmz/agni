@@ -7,13 +7,14 @@ class TaskParam(BaseModel):
 
 class Task(BaseModel):
     title: str
-    description: str
     query: str
-    author_id: str
+    description: str
     search_url: str
 
 
 class Answer(BaseModel):
+    user_id: int
     task_id: int
+    condition_id: int
     answer: str
     reason: str

@@ -9,12 +9,13 @@ class Task(Base):
         Integer,
         index=True,
         primary_key=True,
+        autoincrement=True,
         comment="Identification for internal process",
     )
 
-    query = Column(String, comment="Search query for each task")
-
     title = Column(String, comment="Title of each task")
+
+    query = Column(String, comment="Search query for each task")
 
     description = Column(String, comment="Description of each task")
 
