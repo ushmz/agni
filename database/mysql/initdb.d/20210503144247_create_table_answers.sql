@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS answers (
     id INT(11) NOT NULL AUTO_INCREMENT,
-    uid VARCHAR(255) NOT NULL,
+    user_id int(11) NOT NULL,
     task_id INT(11),
     condition_id INT(11),
-    task_condition_relations_id INT(11),
+    answer TEXT NOT NULL,
     reason TEXT DEFAULT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
