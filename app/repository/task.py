@@ -1,3 +1,4 @@
+from infra.mysql import get_connection
 from domain.task import Answer, Task
 from domain.repository.task import TaskRepository
 
@@ -12,7 +13,22 @@ class TaskRepositoryImpl(TaskRepository):
         returns:
             info(TaskInfo) : Information object
         """
-        raise NotImplementedError(f"params: task_id={task_id}")
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+
+        try:
+            cur.execute(
+                "SELECT query, title, description, search_url"
+                + " FROM tasks WHERE id = %s" % (task_id,)
+            )
+            rs = cur.fetchone()
+            return rs
+        except Exception as e:
+            print(f"[ERROR] {e}")
+            return Task()
+        finally:
+            cur.close()
+            conn.close()
 
     def create_answer(self, answer: Answer) -> None:
         """
@@ -23,4 +39,26 @@ class TaskRepositoryImpl(TaskRepository):
         returns:
             None
         """
-        raise NotImplementedError(f"params: answer={answer}")
+        conn = get_connection()
+        cur = conn.cursor()
+
+        try:
+            cur.execute(
+                "INSERT INTO"
+                + " answers(user_id, task_id, condition_id, answer, reason)"
+                + " VALUES('%s', '%s', '%s', '%s', '%s')"
+                % (
+                    answer.user_id,
+                    answer.task_id,
+                    answer.condition_id,
+                    answer.answer,
+                    answer.reason,
+                )
+            )
+        except Exception as e:
+            print(f"[ERROR] {e}")
+        else:
+            conn.commit()
+        finally:
+            cur.close()
+            conn.close()

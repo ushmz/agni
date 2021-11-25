@@ -10,6 +10,6 @@ class TaskUsecase:
         task = self.repository.get_task_description(task_id)
         return task
 
-    def save_task_answer(self, task_id: int, answer: Answer) -> int:
+    def save_task_answer(self, answer: Answer) -> int:
         ans_id = self.repository.create_answer(answer)
         return ans_id
