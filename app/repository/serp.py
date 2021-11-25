@@ -1,3 +1,4 @@
+from infra.mysql import get_connection
 from domain.serp import SearchResult
 from typing import List
 from domain.repository.serp import SerpRepository
@@ -10,7 +11,27 @@ class SerpRepositoryImpl(SerpRepository):
 
         args:
             task_id(int) : Task ID
+            offset(int)  : Offset number of pages
         returns:
             serps(List[Serp]) : Listed result page objects
         """
-        raise NotImplementedError(f"params: task_id={task_id}, offset={offset}")
+
+        conn = get_connection()
+        cur = conn.cursor(dictionary=True)
+
+        try:
+            cur.execute(
+                "SELECT * FROM search_pages WHERE task_id = %s LIMIT %s, 10"
+                % (
+                    task_id,
+                    offset * 10,
+                )
+            )
+            result = cur.fetchall()
+            return result
+        except Exception as e:
+            print(f"[ERROR] {e}")
+            return []
+        finally:
+            cur.close()
+            conn.close()
